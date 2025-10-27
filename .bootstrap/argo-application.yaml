@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opendora
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: opendora
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: openshift
+    repoURL: 'https://github.com/sumicsamy/opendora'
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

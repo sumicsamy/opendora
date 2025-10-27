@@ -34,7 +34,7 @@ class WireMockConfiguration {
 
         wireMockServer.start();
 
-        log.info("WireMock server initialized and is running on port {}", wireMockPort);
+         log.info("WireMock server initialized and is running on port {}", wireMockPort);
 
         return wireMockServer;
     }

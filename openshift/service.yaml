@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: opendora
+  namespace: opendora
+spec:
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: wiremock
+      protocol: TCP
+      port: 10666
+      targetPort: 10666
+  selector:
+    app: opendora
+---
+
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: opendora
+  namespace: opendora
+spec:
+  to:
+    kind: Service
+    name: opendora
+    weight: 100
+  port:
+    targetPort: 10666
+  tls:
+    termination: edge
+  wildcardPolicy: None
